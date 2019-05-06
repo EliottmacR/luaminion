@@ -1,21 +1,32 @@
 text_displayer = { -- command lines like display 
     lines = {}, -- list of lines
-    top_displayed_ind = 0
+    interlines = 7,
+    font_size = 16,
+    top_displayed_ind = 1
 }
 
-function init()
-    write("text_displayer init done !")
+txt_display_on = false -- set in init  
+std_height = 0 -- set in init
+
+function txt_displayer_init()
+    std_height = str_height("!")
+    setNewFont(text_displayer.font_size)
+    love.graphics.setNewFont(text_displayer.font_size)
+    txt_display_on = true
 end
 
 function write(string)
     if not string then return end
     table.insert(text_displayer.lines, string)
+
+    if (#text_displayer. lines - text_displayer. top_displayed_ind) * (std_height+ text_displayer. interlines) > GH then 
+        text_displayer. top_displayed_ind = text_displayer. top_displayed_ind + 1 
+    end
 end
 
 function txt_display()
-    --love.graphics.setBackgroundColor( 0, 0, 0)
-    setNewFont(32)
-    for i = 1, #text_displayer do
-        lprint(text_displayer.lines[i])
+    for i = text_displayer.top_displayed_ind, #text_displayer.lines  do
+        love.graphics.print( text_displayer.lines[ i ], 0,  (i - text_displayer.top_displayed_ind)  * ( std_height + text_displayer.interlines ) )
     end
 end
+

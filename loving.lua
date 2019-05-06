@@ -1,7 +1,6 @@
 function color(...) love.graphics.setColor(...) end
 
 function fill_rect(...) love.graphics.rectangle("fill", ...) end
-
 function lprint(...) love.graphics.print(...) end
 
 function draw(...) love.graphics.draw(...) end
@@ -39,4 +38,6 @@ function copy(obj)
   for k, v in pairs(obj) do res[copy(k)] = copy(v) end
   return res
 end
+
+function mouse_is_down(...) return love.mouse.isDown(...) end
 
