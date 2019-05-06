@@ -6,7 +6,7 @@ function lprint(...) love.graphics.print(...) end
 
 function draw(...) love.graphics.draw(...) end
 
-function setNewFont(...) love.graphics.setNewFont(...) end
+function setNewFont(..) love.graphics.setNewFont(...) end
 
 function str_width(str)
   str = str or ""
@@ -18,7 +18,7 @@ function str_height(str)
 end
 
 function rnd(...) return love.math.random(...) end
-function irnd(a, b) return math.floor(love.math.random(...)) end
+function irnd(...) return math.floor(love.math.random(...)) end
 
 function cos(...) return math.cos(...) end
 function sin(...) return math.sin(...) end
