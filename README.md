@@ -1,0 +1,2 @@
+# luaminion
+Dominion like game
