@@ -1,14 +1,15 @@
 require("txt_display")
 
-txt_display_on = true
+t = 0 -- time since launch
 
 function init_game()
-
+    txt_displayer_init()
 
 end
 
 function update_game(dt)
-
+    t = t + dt
+    write("current t = " .. t )
 end
 
 function draw_game()
