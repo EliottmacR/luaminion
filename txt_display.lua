@@ -18,7 +18,6 @@ end
 function write(string)
     if not string then return end
     table.insert(text_displayer.lines, string)
-
     if (#text_displayer. lines - text_displayer. top_displayed_ind) * (std_height+ text_displayer. interlines) > GH then 
         text_displayer. top_displayed_ind = text_displayer. top_displayed_ind + 1 
     end
