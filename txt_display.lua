@@ -4,7 +4,7 @@ text_displayer = { -- command lines like display
 }
 
 function init()
-    
+    write("text_displayer init done !")
 end
 
 function write(string)
