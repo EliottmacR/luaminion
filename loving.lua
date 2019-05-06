@@ -6,7 +6,7 @@ function lprint(...) love.graphics.print(...) end
 
 function draw(...) love.graphics.draw(...) end
 
-function setNewFont(..) love.graphics.setNewFont(...) end
+function setNewFont(...) love.graphics.setNewFont(...) end
 
 function str_width(str)
   str = str or ""
