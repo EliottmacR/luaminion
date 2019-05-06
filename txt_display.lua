@@ -15,7 +15,7 @@ end
 function txt_display()
     love.graphics.setBackgroundColor( 0, 0, 0)
     setNewFont(32)
-    for i = 1, text_displayer do
+    for i = 1, #text_displayer do
         lprint(text_displayer.lines[i])
     end
 end
