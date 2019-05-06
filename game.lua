@@ -4,7 +4,6 @@ t = 0 -- time since launch
 
 function init_game()
     txt_displayer_init()
-
 end
 
 function update_game(dt)

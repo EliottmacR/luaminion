@@ -37,6 +37,10 @@ function love.draw()
 end
 
 function love.update(dt)
+
+  if dt < 1/30 then
+   love.timer.sleep(1/30 - dt)
+  end
   update_game(dt)
 end
 
