@@ -48,88 +48,64 @@ game = {
 the cards are gonna be sorted everywhere as such:
 -----
 {id_of_card : number_of_cards}
+ =
 {index      : value          }
 -----
 
 ]]
 
 
-function transfer_card(tab1, tab2, id_of_card)
--- will transfer one card from tab1 to tab2
--- returns false if couldnt do it
--- check if card is in tab1
+function luaminion_init()
+  init_game_from_template()
+  next_step = init_players
+  -- luaminion_next()
+end
+ 
+function luaminion_next()
+  if not next_step then return end 
+  next_step()
+end
 
+function init_game_from_template()
+  for i, t in pairs(game.template) do
+    game.cards[t.id] = t.count
+  end  
+end
+ 
+function transfer_card(tab1, tab2, id_of_card)
   if not tab1 or not tab2 or not id_of_card or (not tab1[id_of_card] or tab1[id_of_card] < 1) then return false end
-  
-  
-  -- write("transfered a " .. id_of_card)
   
   tab1[id_of_card] =  tab1[id_of_card]       - 1
   tab2[id_of_card] = (tab2[id_of_card] or 0) + 1
   
   return true
-
 end
 
+function init_players()
 
-
-function luaminion_init()
-  
-  init_cards()
-  next_step = give_players_cards
-  luaminion_next()
-  
-end
-
-function init_cards()
-
-  for i, t in pairs(game.template) do
-    game.cards[t.id] = t.count
-  end  
-
-end
-  
-function luaminion_next()
-  if not next_step then return end 
-  
-  next_step()
-end
-
-
-function give_players_cards()
-
-  distribute_cards()
-  
-  for i, p in pairs(players) do 
-    draw_card(i, 5)
-  end
-
-  -- write("gave players cards !")
+  init_p_decks()
+  init_p_hands()
 
   -- check every card in hand and writes content
-  write_p_hands()
-  
   
   next_step = nil
 
 end
 
-function distribute_cards()
+function init_p_hands()
+  for i, p in pairs(players) do draw_card(i, 5) end
+  write_p_hands()
+end
 
+function init_p_decks()
   for i, p in pairs (players) do
-    
-    -- give players copper
     for i = 1, 7 do
-      if transfer_card(game.cards, p.deck, "copper") then write("gave " .. p.name.." a card cooper !") end
+      transfer_card(game.cards, p.deck, "copper")
     end
-    
-    -- give players domain
     for i = 1, 3 do
-      if transfer_card(game.cards, p.deck, "domain") then write("gave " .. p.name.." a card domain !") end
+     transfer_card(game.cards, p.deck, "domain")
     end
-    
   end
-
 end
 
 function draw_card( ind_p, numb_cards, id_card)
@@ -139,22 +115,20 @@ function draw_card( ind_p, numb_cards, id_card)
   
     for i = 1, numb_cards do 
       local p = players[ind_p]
-      
-      local c = get_rnd_v_from(p.deck)
+      local c = get_rnd_ind_from(p.deck)
       if not c then break end
       
-      if transfer_card(p.deck, p.hand, c.index) then write("gave " .. p.name.." a card " ..  c.index ) end
+      transfer_card(p.deck, p.hand, c.index) 
     end
     
-  else
-  
+  else  
     local i = 0
-    while #players[ind_p].deck < 1 and i < numb_cards and transfer_card(players[ind_p].deck, players[ind_p].hand, ind_p) do i = i + 1 end
+    while #players[ind_p].deck[id_card] > 1 and i < numb_cards and transfer_card(players[ind_p].deck, players[ind_p].hand, ind_p) do i = i + 1 end
     
   end
 end
 
-function get_rnd_v_from(tab)
+function get_rnd_ind_from(tab)
   
   local index = {}
   
@@ -176,7 +150,6 @@ function get_rnd_v_from(tab)
   
 end
 
-
 function write_p_hands(ind_p)
 
   if not ind_p or players[ind_p] then 
@@ -188,7 +161,7 @@ function write_p_hands(ind_p)
       for i, v in pairs(p.hand) do 
         for j = 1, v do str = str .. "[ " .. i .. " ] " end        
       end
-      print(str)      
+      write(str)      
     end
   else
      -- print one player's hand
@@ -199,7 +172,7 @@ function write_p_hands(ind_p)
     for i, v in pairs(p.hand) do 
       for j = 1, v do str = str .. "[ " .. i .. " ] " end   
     end
-    print(str)
+    write(str)
   end
 end 
 

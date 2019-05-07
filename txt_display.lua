@@ -41,6 +41,4 @@ function txt_display()
              (text_displayer.top_displayed_ind - 1 ) / (#text_displayer.lines) * GH, 
              10, 
              text_displayer.max_lines_on_s / (#text_displayer.lines - 1) * GH) 
-  
-  
 end
