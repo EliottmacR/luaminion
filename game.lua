@@ -20,6 +20,16 @@ function update_game(dt)
 end
 
 function draw_game()
+
+  color(.2, 0, .2)
+  fill_rect(0, 0, GW, GH)
+  color(1, 1, 1)
+  
   if txt_display_on then
-    txt_display() return  end
+    txt_display()
+    hide_background() 
+    return  
+  end
+    
+  
 end

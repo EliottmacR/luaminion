@@ -41,3 +41,19 @@ end
 
 function mouse_is_down(...) return love.mouse.isDown(...) end
 
+function hide_background(col)
+  col = col or {0, 0, 0}
+    
+  color(col)  
+  local w = love.graphics.getWidth() / zoom
+  local h = love.graphics.getHeight() / zoom
+  
+  fill_rect(0, 0, -w, -h)
+  fill_rect(0, 0, -w,  h)
+  fill_rect(0, 0,  w, -h)
+  
+  fill_rect(GW, GH,  w,  h)
+  fill_rect(GW, GH,  w, -h)
+  fill_rect(GW, GH, -w,  h)  
+
+end

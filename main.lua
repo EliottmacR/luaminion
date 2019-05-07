@@ -56,3 +56,15 @@ function get_mouse_pos()
   return x, y
 
 end
+function love.wheelmoved(x, y)
+  if y > 0 then
+    text_displayer.top_displayed_ind = max(1, text_displayer. top_displayed_ind - 1 )
+  elseif y < 0 then
+    text_displayer.top_displayed_ind = min(#text_displayer.lines - text_displayer.max_lines_on_s, text_displayer. top_displayed_ind + 1)
+    
+  end
+  
+  
+  
+  
+end
